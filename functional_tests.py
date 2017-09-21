@@ -15,7 +15,7 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.get('http://localhost:8000')
 
         # She notices the page title and header mention to-do lists
-        self.assertIn('Chicago Autism Network', self.browser.title)
+        self.assertIn('Guides', self.browser.title)
         self.fail('Finish the test!')
 
         #Emika sees 4 items on the menu - Map, Stories, Guides, Contact
