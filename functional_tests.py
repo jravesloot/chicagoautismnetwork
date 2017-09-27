@@ -11,14 +11,10 @@ class NewVisitorTest(unittest.TestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def test_can_read_the_homepage(self):
+    def test_can_start_a_list_and_retrieve_it_later(self):
         # Edith has heard about a cool new online to-do app. She goes
         # to check out its homepage
         self.browser.get('http://localhost:8000')
-
-        #Emika sees 4 items on the menu - Map, Stories, Guides, Contact
-
-        # She goes to the stories page and sees
 
         # She notices the page title and header mention to-do lists
         self.assertIn('Guides', self.browser.title)
@@ -34,8 +30,7 @@ class NewVisitorTest(unittest.TestCase):
 
         # She types "Buy peacock feathers" into a text box (Edith's hobby
         # is tying fly-fishing lures)
-        self.assertTrue(
-        any(row.text == '1: Buy peacock feathers' for row in rows),"New to-do item did not appear in table")
+        inputbox.send_keys('Buy peacock feathers')
 
         # When she hits enter, the page updates, and now the page lists
         # "1: Buy peacock feathers" as an item in a to-do list table
@@ -44,14 +39,15 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == '1: Buy peacock feathers' for row in rows)
-        )
+
+        self.assertTrue(any(row.text == '1: Buy peacock feathers' for row in rows),
+        f"New to-do item did not appear in table. Contents were:\n{table.text}")
 
         # There is still a text box inviting her to add another item. She
         # enters "Use peacock feathers to make a fly" (Edith is very
         # methodical)
         self.fail('Finish the test!')
+
         # Edith wonders whether the site will remember her list. Then she sees
         # that the site has generated a unique URL for her -- there is some
         # explanatory text to that effect.
