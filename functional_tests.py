@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
 import unittest
 
 class NewVisitorTest(unittest.TestCase):
@@ -32,7 +34,8 @@ class NewVisitorTest(unittest.TestCase):
 
         # She types "Buy peacock feathers" into a text box (Edith's hobby
         # is tying fly-fishing lures)
-        inputbox.send_keys('Buy peacock feathers')
+        self.assertTrue(
+        any(row.text == '1: Buy peacock feathers' for row in rows),"New to-do item did not appear in table")
 
         # When she hits enter, the page updates, and now the page lists
         # "1: Buy peacock feathers" as an item in a to-do list table
